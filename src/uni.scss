@@ -3,47 +3,60 @@
 /* 1. 基础变量 (注入到全局 page 节点) - 默认为 Light 模式 */
 page {
   /* 背景与层级 */
-  --bg-base: #F2F2F7;         /* 极浅灰，用于底层背景 */
-  --surface-card: #FFFFFF;    /* 纯白，用于卡片、弹窗背景 */
-  --surface-hover: #E5E5EA;   /* 交互反馈色 */
-  
+  --bg-base: #f2f2f7; /* 极浅灰，用于底层背景 */
+  --surface-card: #ffffff; /* 纯白，用于卡片、弹窗背景 */
+  --surface-hover: #e5e5ea; /* 交互反馈色 */
+
   /* 文本排版 */
-  --text-primary: #000000;    /* 核心标题、金额数字 */
+  --text-primary: #000000; /* 核心标题、金额数字 */
   --text-secondary: rgba(60, 60, 67, 0.6); /* 辅助说明文本 */
-  --text-tertiary: rgba(60, 60, 67, 0.3);  /* 禁用或边框色 */
+  --text-tertiary: rgba(60, 60, 67, 0.3); /* 禁用或边框色 */
 
   /* 品牌与业务高对比色 (Shark Accounting 核心) */
-  --color-primary: #007AFF;   /* 品牌蓝 */
-  --color-income: #34C759;    /* 苹果绿 - 收入 */
-  --color-expense: #FF3B30;   /* 苹果红 - 支出 */
-  
+  --color-primary: #007aff; /* 品牌蓝 */
+  --color-expense: #f43f5e; /* 玫瑰红：柔和的支出警示色 */
+  --color-income: #10b981; /* 翡翠绿：舒适的收入增长色 */
+
+  --bg-page: #f5f6fa; /* 页面底层背景色 */
+  --card-bg: #ffffff; /* 卡片背景色 */
+  --card-shadow: 0 8rpx 24rpx rgba(149, 157, 165, 0.08); /* 极致柔和的弥散阴影 */
+
+  --text-main: #1f2937; /* 主标题：极深灰 */
+  --text-sub: #9ca3af; /* 副标题/时间：中级灰 */
+  --divider: #f3f4f6; /* 分割线颜色 */
   /* 阴影效果 */
   --shadow-card: 0 8px 24px rgba(0, 0, 0, 0.04);
   --shadow-glow-income: 0 4px 12px rgba(52, 199, 89, 0.3);
   --shadow-glow-expense: 0 4px 12px rgba(255, 59, 48, 0.3);
 
   /* 全局过渡动画 */
-  --theme-transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+  --theme-transition:
+    background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
   --safe-area-bottom: env(safe-area-inset-bottom, 20px);
 }
 
 /* 2. Modern Dark Mode 变量覆盖 */
 .theme-dark {
   /* 深邃的暗黑背景层级 */
-  --bg-base: #121212;         /* 现代暗黑标准底色 */
-  --surface-card: #1C1C1E;    /* 核心卡片色，比底色稍亮，拉开层级 */
-  --surface-hover: #2C2C2E;   
-  
+  --bg-base: #121212; /* 现代暗黑标准底色 */
+  --surface-card: #1c1c1e; /* 核心卡片色，比底色稍亮，拉开层级 */
+  --surface-hover: #2c2c2e;
+
   /* 暗黑模式下的文字需要降低一点点纯度以防刺眼 */
-  --text-primary: rgba(255, 255, 255, 0.95); 
-  --text-secondary: rgba(235, 235, 245, 0.6); 
+  --text-primary: rgba(255, 255, 255, 0.95);
+  --text-secondary: rgba(235, 235, 245, 0.6);
   --text-tertiary: rgba(235, 235, 245, 0.3);
 
   /* 业务色调整为更亮的荧光色，提升暗光下的可读性 */
-  --color-primary: #0A84FF;
-  --color-income: #32D74B;    /* 荧光绿 - 收入 (Glow Effect) */
-  --color-expense: #FF453A;   /* 珊瑚红 - 支出 (Glow Effect) */
+  --color-primary: #0a84ff;
+  --color-income: #32d74b; /* 荧光绿 - 收入 (Glow Effect) */
+  --color-expense: #ff453a; /* 珊瑚红 - 支出 (Glow Effect) */
 
+  --card-shadow: 0 8rpx 24rpx rgba(0, 0, 0, 0.25);
+
+  --text-main: #f3f4f6;
+  --text-sub: #6b7280;
+  --divider: #2c2c2e;
   /* 暗黑模式下阴影加深 */
   --shadow-card: 0 8px 24px rgba(0, 0, 0, 0.4);
   --shadow-glow-income: 0 4px 16px rgba(50, 215, 75, 0.4);

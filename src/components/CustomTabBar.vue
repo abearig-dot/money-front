@@ -1,9 +1,9 @@
 <template>
   <view class="custom-tab-bar">
-    <view 
-      class="tab-item" 
+    <view
+      class="tab-item"
       :class="{ active: currentPath === item.pagePath }"
-      v-for="(item, index) in tabList" 
+      v-for="(item, index) in tabList"
       :key="index"
       @click="handleSwitch(item)"
     >
@@ -24,42 +24,43 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed } from "vue";
 
 // 接收父组件（当前页面）传来的路径，用于判断哪个 tab 应该高亮
 const props = defineProps({
   currentPath: {
     type: String,
-    required: true
-  }
-})
+    required: true,
+  },
+});
 
 // Tab 列表配置
 const tabList = [
-  { pagePath: '/pages/index/index', text: '明细', icon: '🏠', isAction: false },
-  { pagePath: '/pages/chart/chart', text: '图表', icon: '📊', isAction: false },
+  { pagePath: "/pages/index/index", text: "明细", icon: "🏠", isAction: false },
+  { pagePath: "/pages/chart/chart", text: "图表", icon: "📊", isAction: false },
   // 特殊的中间按钮，不需要 pagePath
-  { isAction: true }, 
-  { pagePath: '/pages/bill/bill', text: '账单', icon: '🧾', isAction: false },
-  { pagePath: '/pages/mine/mine', text: '我的', icon: '👤', isAction: false }
-]
+  { isAction: true },
+  { pagePath: "/pages/bill/bill", text: "账单", icon: "🧾", isAction: false },
+  { pagePath: "/pages/mine/mine", text: "我的", icon: "👤", isAction: false },
+];
 
 const handleSwitch = (item: any) => {
   if (item.isAction) {
+    
     // 点击中间的加号按钮，由于记账通常不需要作为 Tab 页，可以使用 navigateTo 跳转或唤起弹窗
-    console.log("触发记账功能")
-    uni.navigateTo({ url: '/pages/record/record' }) 
-    return
+    console.log("触发记账功能");
+    uni.$emit("open-record-sheet");
+    return;
   }
-  
+
   // 已经是当前页，不跳转
-  if (props.currentPath === item.pagePath) return
+  if (props.currentPath === item.pagePath) return;
 
   // 点击其他 Tab，使用 switchTab 进行跳转
   uni.switchTab({
-    url: item.pagePath
-  })
-}
+    url: item.pagePath,
+  });
+};
 </script>
 
 <style lang="scss">
@@ -105,16 +106,21 @@ const handleSwitch = (item: any) => {
     }
 
     &.active {
-      .tab-icon { filter: none; }
+      .tab-icon {
+        filter: none;
+      }
       /* 修正：高亮时使用主文本变量 */
-      .tab-text { color: var(--text-primary); font-weight: 500; }
+      .tab-text {
+        color: var(--text-primary);
+        font-weight: 500;
+      }
     }
   }
 
   .action-btn-wrapper {
     position: relative;
     top: -30rpx;
-    
+
     .action-btn {
       width: 110rpx;
       height: 110rpx;
@@ -126,15 +132,17 @@ const handleSwitch = (item: any) => {
       align-items: center;
       box-shadow: 0 12rpx 24rpx rgba(253, 224, 71, 0.3);
       /* 修正：边框与页面底色融为一体，产生挖空效果 */
-      border: 8rpx solid var(--bg-base); 
-      
+      border: 8rpx solid var(--bg-base);
+
       .plus-icon {
         font-size: 60rpx;
         color: #121212; /* 这里保持黑色，因为按钮底色是明亮的黄色 */
         font-weight: 300;
         margin-top: -6rpx;
       }
-      &:active { transform: scale(0.95); }
+      &:active {
+        transform: scale(0.95);
+      }
     }
   }
 }

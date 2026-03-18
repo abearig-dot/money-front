@@ -1,24 +1,28 @@
-<script setup lang="ts">
-import { useTheme } from '@/hooks/useTheme';
-
-const { themeClass } = useTheme(); //
-</script>
-
 <template>
   <view class="app-layout" :class="themeClass">
     <slot />
+    <RecordActionSheet ref="recordSheetRef" />
   </view>
 </template>
 
-<style lang="scss" scoped>
-.app-layout {
-  /* 确保外层容器至少占满屏幕，背景色跟随 CSS 变量 */
-  min-height: 100vh;
-  background-color: var(--bg-base);
-  color: var(--text-primary);
-  transition: background-color 0.3s ease, color 0.3s ease;
-  
-  /* 这里可以统一处理 iOS 底部安全区 */
-  padding-bottom: env(safe-area-inset-bottom);
-}
-</style>
+<script setup lang="ts">
+import { ref, onMounted, onUnmounted } from 'vue'
+import { useTheme } from '@/hooks/useTheme'
+import RecordActionSheet from '@/components/RecordActionSheet.vue'
+
+const { themeClass } = useTheme()
+const recordSheetRef = ref<InstanceType<typeof RecordActionSheet> | null>(null)
+
+onMounted(() => {
+  // 只需要保留这一个监听即可
+  uni.$on('open-record-sheet', () => {
+    if (recordSheetRef.value) {
+      recordSheetRef.value.open()
+    }
+  })
+})
+
+onUnmounted(() => {
+  uni.$off('open-record-sheet')
+})
+</script>
